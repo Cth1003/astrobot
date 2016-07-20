@@ -55,6 +55,7 @@ slack.on('message', function(message) {
 	// Checks if the message is a message (not an edited, etc) and that the message is to AstroBot
     if (message.type === 'message' && isDirect(slack.self.id, message.text)) {
 		
+		//Splits the message
 		// [0]: Username, [1]: Command, [2]: Options, [3] Arguements
 		var messageArray = message.text.split(" ");
 	
@@ -72,19 +73,22 @@ slack.on('message', function(message) {
 		{		
 			switch(command.toUpperCase())
 			{
+				//If command is "apod"
 				case 'apod'.toUpperCase():
+			                //Execute command
 					ProcessOptions(option, arguement, channel, user)
 					break;
-				
+				//If command is "help"
 				case 'help'.toUpperCase():
+					//Execute command
 					ProcessOptions(option, arguement, channel, user);
 					break; 
-					
+				//If command is "hi" , "hey" or "hello"
 				case 'hi'.toUpperCase():
 				case 'hey'.toUpperCase():
 				case 'hello'.toUpperCase():
 					channel.send("Hi!");
-				default: 
+				default: //If the command is invalid
 					channel.send("Invalid command. Please use '@astrobot help' for more information.");
 			}
 		}
